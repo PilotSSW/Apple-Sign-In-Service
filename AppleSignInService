@@ -36,7 +36,6 @@ class AppleSignInService: NSObject, ASAuthorizationControllerDelegate, ASAuthori
 
     internal func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         guard let window = UIViewController.top()?.view.window else {
-            SDLogger.logEvent("No window found", attributes: nil)
             assertionFailure("No window for apple sign in to adhere to")
             return UIApplication.shared.keyWindow!
         }
@@ -112,7 +111,6 @@ class AppleSignInService: NSObject, ASAuthorizationControllerDelegate, ASAuthori
 
         // Case: User was able to sign-up password - we shouldn't see this case.
         case _ as ASPasswordCredential:
-            SDLogger.recordError(SDError.AppleSigninReturnedPasswordCredential(message: "Apple Sign-in returned password credential"))
             appleSigninCallback?(AppleSignInResponse(result: .failedApple(message: "Apple returned password credential"),
                                                      identityToken: nil,
                                                      appleUserID: nil,
@@ -137,10 +135,6 @@ class AppleSignInService: NSObject, ASAuthorizationControllerDelegate, ASAuthori
                                                      email: nil,
                                                      fullName: nil))
         } else {
-            SDLogger.recordError(error, withAdditionalUserInfo: [
-                "signInMethod": "Apple Sign-in"
-            ])
-
             appleSigninCallback?(AppleSignInResponse(result: .failedApple(message: error.localizedDescription),
                                                      identityToken: nil,
                                                      appleUserID: nil,
@@ -168,11 +162,6 @@ class AppleUserStore {
             let personData = try NSKeyedArchiver.archivedData(withRootObject: appleUserObject, requiringSecureCoding: true)
             UserDefaults.standard.set(personData, forKey: key)
         } catch(let error) {
-            SDLogger.recordError(error, withAdditionalUserInfo: [
-                "appleUserId": userId,
-                "message": "Failed to securely turn apple user object (PerosonNameComponents) into secure data for storing"
-            ])
-
             let personData = NSKeyedArchiver.archivedData(withRootObject: appleUserObject)
             UserDefaults.standard.set(personData, forKey: key)
         }
