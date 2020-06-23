@@ -7,7 +7,7 @@ This file is meant to be a convenient way to abstract the Apple Sign-in Service 
 ## How to use 
 This class should be used similarly to the following: 
 
-`
+```
     @available(iOS 13, *)
     @objc func loginWithApple() {
         AppleSignInService.shared.signinRequest() { [weak self] signInResponse in
@@ -28,7 +28,7 @@ This class should be used similarly to the following:
             }
         }
     }
-`
+```
 
 # Countdown Timer
 ## Purpose 
@@ -36,7 +36,7 @@ This is an easy to use abstraction of a timer that allows you to countdown and b
 You can also have alerts fired off incrementally before it finishes counting down. 
 
 ## How to use
-`
+```
     countdownTimer = SDCountdownTimer(
             duration: 3.0,
             refreshDuration: 1.0,
@@ -49,4 +49,4 @@ You can also have alerts fired off incrementally before it finishes counting dow
             }
         })
     countdownTimer?.start()
-`
+```
