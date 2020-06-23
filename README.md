@@ -1,5 +1,6 @@
-# Apple-Sign-In-Service
+# Common iOS Components
 
+# Apple SignIn Server
 ## Purpose
 This file is meant to be a convenient way to abstract the Apple Sign-in Service and call it similarly to Facebook and Google's O-Auth services.
 
@@ -28,3 +29,8 @@ This class should be used similarly to the following:
         }
     }
 `
+
+# Countdown Timer
+## Purpose 
+This is an easy to use abstraction of a timer that allows you to countdown and be alerted when the timer goes off. 
+You can also have alerts fired off incrementally before it finishes counting down. 
