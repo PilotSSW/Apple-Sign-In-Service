@@ -1,6 +1,6 @@
 # Common iOS Components
 
-# Apple SignIn Server
+# Apple SignIn Service
 ## Purpose
 This file is meant to be a convenient way to abstract the Apple Sign-in Service and call it similarly to Facebook and Google's O-Auth services.
 
@@ -34,3 +34,19 @@ This class should be used similarly to the following:
 ## Purpose 
 This is an easy to use abstraction of a timer that allows you to countdown and be alerted when the timer goes off. 
 You can also have alerts fired off incrementally before it finishes counting down. 
+
+## How to use
+`
+    countdownTimer = SDCountdownTimer(
+            duration: 3.0,
+            refreshDuration: 1.0,
+            restartAfterFinish: true,
+            finishBlock: { duration in
+                print("Was run for \(duration)")
+            },
+            updateBlock: { (timeRemaining, elapsedTime, timerSelf) in
+                print("Has run for \(elapsedTime): \(timeRemaining) remaining")
+            }
+        })
+    countdownTimer?.start()
+`
