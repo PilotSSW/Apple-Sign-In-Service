@@ -37,7 +37,7 @@ You can also have alerts fired off incrementally before it finishes counting dow
 
 ## How to use
 ```
-    countdownTimer = SDCountdownTimer(
+    countdownTimer = CountdownTimer(
             duration: 3.0,
             refreshDuration: 1.0,
             restartAfterFinish: true,
